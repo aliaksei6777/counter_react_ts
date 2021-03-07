@@ -13,7 +13,7 @@ function App() {
     const [textMode,setTextMode] = useState<boolean>(false)
 
     const onIncClickHandler = () => setCounterValue(counterValue + 1)
-    const onResetClickHandler = () => setCounterValue(0)
+    const onResetClickHandler = () => setCounterValue(startValue)
 
     return (
         <div>
