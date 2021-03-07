@@ -1,0 +1,61 @@
+.mainBlock {
+  width: 200px;
+  height: 150px;
+  border: 2px solid mediumspringgreen;
+  border-radius: 5px;
+  background-color: grey;
+}
+
+.counterBlock {
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 75px;
+  margin: 10px;
+  width: 175px;
+  height: 75px;
+  border-radius: 5px;
+  border: 2px solid mediumspringgreen;
+  background-color: mediumspringgreen;
+}
+
+.buttonBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  width: 175px;
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid mediumspringgreen;
+  background-color: grey;
+}
+
+button {
+  background-color: mediumspringgreen;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 10px;
+  width: 60px;
+  outline: transparent;
+}
+
+.red {
+  color: red;
+}
+
+.textMode {
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 75px;
+  margin: 10px;
+  width: 175px;
+  height: 75px;
+  border-radius: 5px;
+  border: 2px solid mediumspringgreen;
+  background-color: mediumspringgreen;
+}
