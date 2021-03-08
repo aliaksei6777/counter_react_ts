@@ -34,7 +34,7 @@ function Counter(props: CounterPropsType) {
                     />
                     <Buttons onClick={props.onResetClickHandler}
                              buttonTitle={"reset"}
-                             disabled={props.counterValue === props.startValue}
+                             disabled={props.counterValue === props.startValue || props.textMode}
                     />
                 </div>
             </div>
