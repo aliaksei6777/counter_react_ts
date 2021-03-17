@@ -1,39 +1,42 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Buttons} from './Buttons';
-import s from "./CounterSetup.module.css"
+import s from './CounterSetup.module.css'
+import {StateRootType} from "../App";
+import {ActionType, setCounterValueAC, setDisableButtonAC,
+    setMaxValueAC, setStartValueAC, setTextModeAC} from "../counter-reducer";
 
 type CounterSetupPropsType = {
-    maxValue: number
-    startValue: number
-    setCounterValue: (value: number) => void
-    setMaxValue: (value: number) => void
-    setTextMode: (textMode: boolean) => void
-    setStartValue: (startValue: number) => void
+    state: StateRootType
+    dispatch: (action: ActionType) => void
 }
 
-function CounterSetup(props: CounterSetupPropsType) {
-    const [buttonDisabled, setButtonDisabled] = useState(true)
+const CounterSetup: React.FC<CounterSetupPropsType> = ({state,dispatch}) => {
+    const maxValue = state.maxValue
+    const startValue = state.startValue
 
-    const onSetHandler = () => {
-        props.setMaxValue(props.maxValue)
-        props.setCounterValue(props.startValue)
-        props.setTextMode(false)
-        setButtonDisabled(true)
+    const onSetClickHandler = () => {
+        dispatch(setMaxValueAC(maxValue))
+        dispatch(setCounterValueAC(startValue))
+        dispatch(setTextModeAC(false))
+        dispatch(setDisableButtonAC(true))
     }
-    const onMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMaxValue(e.currentTarget.valueAsNumber);
-        e.currentTarget.valueAsNumber < 0 || e.currentTarget.valueAsNumber <= props.startValue ?
-            setButtonDisabled(true) : setButtonDisabled(false);
-        props.setTextMode(true);
+    const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setMaxValueAC(e.currentTarget.valueAsNumber))
+        e.currentTarget.valueAsNumber < 0 || e.currentTarget.valueAsNumber <= startValue
+            ? dispatch(setDisableButtonAC(true))
+            : dispatch(setDisableButtonAC(false));
+        dispatch(setTextModeAC(true))
     }
-    const onStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setStartValue(e.currentTarget.valueAsNumber);
-        e.currentTarget.valueAsNumber < 0 || e.currentTarget.valueAsNumber >= props.maxValue ?
-            setButtonDisabled(true) : setButtonDisabled(false);
-        props.setTextMode(true);
+    const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setStartValueAC(e.currentTarget.valueAsNumber));
+        e.currentTarget.valueAsNumber < 0 || e.currentTarget.valueAsNumber >= maxValue
+            ? dispatch(setDisableButtonAC(true))
+            : dispatch(setDisableButtonAC(false));
+        dispatch(setTextModeAC(true))
     }
-    const maxValueInputClass = props.maxValue < 0 || props.maxValue <= props.startValue ? s.errorInput : ""
-    const startValueInputClass = props.startValue < 0 || props.maxValue <= props.startValue ? s.errorInput : ""
+
+    const maxValueInputClass = maxValue < 0 || maxValue <= startValue ? s.errorInput : ""
+    const startValueInputClass = startValue < 0 || maxValue <= startValue ? s.errorInput : ""
 
     return (
         <div>
@@ -42,24 +45,23 @@ function CounterSetup(props: CounterSetupPropsType) {
                     <div className={s.valueDisplay}>
                         <span>max value: </span>
                         <input className={maxValueInputClass}
-                               value={props.maxValue}
+                               value={maxValue}
                                type={"number"}
-                               onChange={onMaxValueHandler}/>
+                               onChange={onChangeMaxValue}/>
                     </div>
                     <div className={s.valueDisplay}>
                         <span>start value: </span>
                         <input
                             className={startValueInputClass}
-                            value={props.startValue}
+                            value={startValue}
                             type={"number"}
-                            onChange={onStartValueHandler}/>
+                            onChange={onChangeStartValue}/>
                     </div>
                 </div>
                 <div className={s.buttonBlock}>
-                    <Buttons onClick={onSetHandler}
+                    <Buttons onClick={onSetClickHandler}
                              buttonTitle={"set"}
-                             disabled={buttonDisabled}
-                    />
+                             disabled={state.buttonDisable}/>
                 </div>
             </div>
         </div>

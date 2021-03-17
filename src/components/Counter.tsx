@@ -1,41 +1,43 @@
 import React from 'react';
 import {Buttons} from './Buttons';
 import s from "./Counter.module.css"
+import {StateRootType} from "../App";
+import {ActionType, setCounterValueAC} from "../counter-reducer";
+
 type CounterPropsType = {
-    maxValue: number
-    counterValue: number
-    startValue: number
-    onIncClickHandler:() => void
-    onResetClickHandler:() => void
-    textMode: boolean
+    state: StateRootType
+    dispatch: (action: ActionType) => void
 }
 
-function Counter(props: CounterPropsType) {
+const Counter: React.FC<CounterPropsType> = ({state,dispatch}) =>  {
+    const maxValue = state.maxValue
+    const startValue = state.startValue
+    const counterValue = state.counterValue
+    const textMode = state.textMode
+    const error = startValue < 0 || maxValue < 0 || maxValue <= startValue
 
-    const counterBlockClass = `${s.counterBlock} ${props.counterValue === props.maxValue ? s.red : ""}`
-    const textInfoClass = `${props.startValue < 0 || props.maxValue < 0 || props.maxValue <= props.startValue ? s.red : ""}`
-    let textInfo = ""
-    if (props.startValue < 0 || props.maxValue < 0 || props.maxValue <= props.startValue) {
-        textInfo = "Incorrect value!"
-    } else {textInfo = "enter values and press \'set\'"}
+    const counterBlockClass = `${s.counterBlock} ${counterValue === maxValue ? s.red : ""}`
+    const textInfoClass = `${error ? s.red : ""}`
 
+    let textInfo = error ? "Incorrect value!" : "enter values and press \'set\'"
+
+    const onIncClickHandler = () => dispatch(setCounterValueAC(counterValue + 1))
+    const onResetClickHandler = () => dispatch(setCounterValueAC(startValue))
 
     return (
         <div>
             <div className={s.mainBlock}>
-                <div className={props.textMode ? s.textMode : counterBlockClass}>
-                    {props.textMode ? <span className={textInfoClass}>{textInfo}</span> :
-                    <span>{props.counterValue}</span>}
+                <div className={textMode ? s.textMode : counterBlockClass}>
+                    {textMode ? <span className={textInfoClass}>{textInfo}</span> :
+                    <span>{counterValue}</span>}
                 </div>
                 <div className={s.buttonBlock}>
-                    <Buttons onClick={props.onIncClickHandler}
+                    <Buttons onClick={onIncClickHandler}
                              buttonTitle={"inc"}
-                             disabled={props.counterValue === props.maxValue || props.textMode}
-                    />
-                    <Buttons onClick={props.onResetClickHandler}
+                             disabled={counterValue === maxValue || textMode}/>
+                    <Buttons onClick={onResetClickHandler}
                              buttonTitle={"reset"}
-                             disabled={props.counterValue === props.startValue || props.textMode}
-                    />
+                             disabled={counterValue === startValue || textMode}/>
                 </div>
             </div>
         </div>
