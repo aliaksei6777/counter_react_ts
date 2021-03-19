@@ -1,12 +1,12 @@
 import React from 'react';
 
-type ButtonsPropsType = {
+type ButtonPropsType = {
     onClick: () => void
     disabled: boolean
     buttonTitle: string
 }
 
-export function Buttons (props: ButtonsPropsType) {
+export function Button (props: ButtonPropsType) {
 
     return (
         <div>

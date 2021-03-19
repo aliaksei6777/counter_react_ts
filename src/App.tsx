@@ -2,14 +2,16 @@ import React, {useEffect, useReducer} from 'react';
 import "./App.css"
 import Counter from './components/Counter';
 import CounterSetup from "./components/CounterSetup";
-import {reducer, setCounterValueAC, setMaxValueAC, setStartValueAC} from "./counter-reducer";
+import {reducer, setBlockSetupAC, setCounterValueAC, setMaxValueAC, setStartValueAC} from "./counter-reducer";
+import {Button} from "./components/Button";
 
-export type StateRootType = {
+export type StateType = {
     counterValue: number
     maxValue: number
     startValue: number
     textMode: boolean
     buttonDisable: boolean
+    setupBlock: boolean
 }
 
 function App() {
@@ -19,50 +21,41 @@ function App() {
         maxValue: 5,
         startValue: 0,
         textMode: false,
-        buttonDisable: true
+        buttonDisable: true,
+        setupBlock: true
     })
 
     useEffect(() => {
-        let valueAsString = localStorage.getItem('counterValue')
-        if(valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            // setCounterValue(newValue)
-            dispatch(setCounterValueAC(newValue))
+        let counterValueAsString = localStorage.getItem('counterValue')
+        if (counterValueAsString) {
+            dispatch(setCounterValueAC(JSON.parse(counterValueAsString)))
+        }
+        let maxValueAsString = localStorage.getItem('maxValue')
+        if (maxValueAsString) {
+            dispatch(setMaxValueAC(JSON.parse(maxValueAsString)))
+        }
+        let startValueAsString = localStorage.getItem('startValue')
+        if (startValueAsString) {
+            dispatch(setStartValueAC(JSON.parse(startValueAsString)))
         }
     }, [])
     useEffect(() => {
-        localStorage.setItem('counterValue',JSON.stringify(state.counterValue))
-    }, [state.counterValue])
-    useEffect(() => {
-        let valueAsString = localStorage.getItem('maxValue')
-        if(valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            dispatch(setMaxValueAC(newValue))
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('maxValue',JSON.stringify(state.maxValue))
-    }, [state.maxValue])
-    useEffect(() => {
-        let valueAsString = localStorage.getItem('startValue')
-        if(valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            dispatch(setStartValueAC(newValue))
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('startValue',JSON.stringify(state.startValue))
-    }, [state.startValue])
+        localStorage.setItem('counterValue', JSON.stringify(state.counterValue))
+        localStorage.setItem('maxValue', JSON.stringify(state.maxValue))
+        localStorage.setItem('startValue', JSON.stringify(state.startValue))
+    }, [state.counterValue, state.maxValue, state.startValue])
+
+    const setupButtonHandler = () => dispatch(setBlockSetupAC(!state.setupBlock))
 
     return (
-        <div>
-            <div className={"App"}>
-                <CounterSetup
-                    state={state}
-                    dispatch={dispatch}/>
-                <Counter
-                    state={state}
-                    dispatch={dispatch}/>
+        <div className={"App"}>
+            <div>
+                <Counter state={state} dispatch={dispatch} setupButtonHandler={setupButtonHandler}/>
+            </div>
+            <div>
+                <div>
+                    {state.setupBlock && <CounterSetup state={state} dispatch={dispatch}/>}
+                </div>
             </div>
         </div>
     );

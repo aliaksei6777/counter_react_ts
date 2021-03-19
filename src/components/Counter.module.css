@@ -32,15 +32,15 @@
   background-color: grey;
 }
 
-button {
-  background-color: mediumspringgreen;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin: 10px;
-  width: 60px;
-  outline: transparent;
-}
+/*button {*/
+/*  !*background-color: mediumspringgreen;*!*/
+/*  font-size: 5px;*/
+/*  font-weight: bold;*/
+/*  border-radius: 5px;*/
+/*  margin: 5px;*/
+/*  width: 30px;*/
+/*  outline: transparent;*/
+/*}*/
 
 .red {
   color: red;
@@ -58,4 +58,8 @@ button {
   border-radius: 5px;
   border: 2px solid mediumspringgreen;
   background-color: mediumspringgreen;
+}
+
+.setupButton {
+  opacity: 0.3;
 }

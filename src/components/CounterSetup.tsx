@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
-import {Buttons} from './Buttons';
+import {Button} from './Button';
 import s from './CounterSetup.module.css'
-import {StateRootType} from "../App";
+import {StateType} from "../App";
 import {ActionType, setCounterValueAC, setDisableButtonAC,
     setMaxValueAC, setStartValueAC, setTextModeAC} from "../counter-reducer";
 
 type CounterSetupPropsType = {
-    state: StateRootType
+    state: StateType
     dispatch: (action: ActionType) => void
 }
 
@@ -59,9 +59,9 @@ const CounterSetup: React.FC<CounterSetupPropsType> = ({state,dispatch}) => {
                     </div>
                 </div>
                 <div className={s.buttonBlock}>
-                    <Buttons onClick={onSetClickHandler}
-                             buttonTitle={"set"}
-                             disabled={state.buttonDisable}/>
+                    <Button onClick={onSetClickHandler}
+                            buttonTitle={"set"}
+                            disabled={state.buttonDisable}/>
                 </div>
             </div>
         </div>
