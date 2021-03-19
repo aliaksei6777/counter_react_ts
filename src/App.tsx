@@ -22,7 +22,7 @@ function App() {
         startValue: 0,
         textMode: false,
         buttonDisable: true,
-        setupBlock: true
+        setupBlock: false
     })
 
     useEffect(() => {
