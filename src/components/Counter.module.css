@@ -1,9 +1,9 @@
 .mainBlock {
   width: 200px;
   height: 150px;
-  border: 2px solid mediumspringgreen;
+  border: 2px solid goldenrod;
   border-radius: 5px;
-  background-color: grey;
+  background-color: seagreen;
 }
 
 .counterBlock {
@@ -16,8 +16,8 @@
   width: 175px;
   height: 75px;
   border-radius: 5px;
-  border: 2px solid mediumspringgreen;
-  background-color: mediumspringgreen;
+  border: 2px solid goldenrod;
+  background-color: wheat;
 }
 
 .buttonBlock {
@@ -28,19 +28,10 @@
   width: 175px;
   height: 35px;
   border-radius: 5px;
-  border: 2px solid mediumspringgreen;
-  background-color: grey;
+  border: 2px solid goldenrod;
+  background-color: burlywood;
 }
 
-/*button {*/
-/*  !*background-color: mediumspringgreen;*!*/
-/*  font-size: 5px;*/
-/*  font-weight: bold;*/
-/*  border-radius: 5px;*/
-/*  margin: 5px;*/
-/*  width: 30px;*/
-/*  outline: transparent;*/
-/*}*/
 
 .red {
   color: red;
@@ -56,10 +47,12 @@
   width: 175px;
   height: 75px;
   border-radius: 5px;
-  border: 2px solid mediumspringgreen;
-  background-color: mediumspringgreen;
+  border: 2px solid goldenrod;
+  background-color: wheat;
 }
 
 .setupButton {
-  opacity: 0.3;
+  opacity: 0.2;
+  background-color: burlywood;
+
 }

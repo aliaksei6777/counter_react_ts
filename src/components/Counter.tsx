@@ -2,21 +2,19 @@ import React from 'react';
 import {Button} from './Button';
 import s from "./Counter.module.css"
 import {StateType} from "../App";
-import {ActionType, setCounterValueAC} from "../counter-reducer";
+import {ActionType, setBlockSetupAC, setCounterValueAC} from "../counter-reducer";
 
 type CounterPropsType = {
     state: StateType
     dispatch: (action: ActionType) => void
-    setupButtonHandler: () => void
 }
 
-const Counter: React.FC<CounterPropsType> = ({state,dispatch, setupButtonHandler}) =>  {
+const Counter: React.FC<CounterPropsType> = ({state,dispatch}) =>  {
     const maxValue = state.maxValue
     const startValue = state.startValue
     const counterValue = state.counterValue
     const textMode = state.textMode
     const error = startValue < 0 || maxValue < 0 || maxValue <= startValue
-
     const counterBlockClass = `${s.counterBlock} ${counterValue === maxValue ? s.red : ""}`
     const textInfoClass = `${error ? s.red : ""}`
 
@@ -24,6 +22,7 @@ const Counter: React.FC<CounterPropsType> = ({state,dispatch, setupButtonHandler
 
     const onIncClickHandler = () => dispatch(setCounterValueAC(counterValue + 1))
     const onResetClickHandler = () => dispatch(setCounterValueAC(startValue))
+    const setupButtonHandler = () => dispatch(setBlockSetupAC(!state.setupBlock))
 
     return (
         <div>
@@ -39,7 +38,7 @@ const Counter: React.FC<CounterPropsType> = ({state,dispatch, setupButtonHandler
                     <Button onClick={onResetClickHandler}
                             buttonTitle={"reset"}
                             disabled={counterValue === startValue || textMode}/>
-                    <div className={state.setupBlock ? s.setupButton : ""}>
+                    <div>
                         <Button onClick={setupButtonHandler} disabled={false} buttonTitle={"setup"}/>
                     </div>
                 </div>

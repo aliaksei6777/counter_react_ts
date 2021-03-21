@@ -1,9 +1,9 @@
 .mainBlock {
   width: 200px;
   height: 150px;
-  border: 2px solid mediumspringgreen;
+  border: 2px solid goldenrod;
   border-radius: 5px;
-  background-color: grey;
+  background-color: seagreen;
 }
 
 .counterBlock {
@@ -14,8 +14,8 @@
   width: 175px;
   height: 75px;
   border-radius: 5px;
-  border: 2px solid mediumspringgreen;
-  background-color: mediumspringgreen;
+  border: 2px solid goldenrod;
+  background-color: wheat;
 }
 
 .valueDisplay {
@@ -32,18 +32,20 @@
   width: 175px;
   height: 35px;
   border-radius: 5px;
-  border: 2px solid mediumspringgreen;
-  background-color: grey;
+  border: 2px solid goldenrod;
+  background-color: burlywood;
 }
 
 button {
-  background-color: mediumspringgreen;
+  background-color: wheat;
   font-size: 15px;
   font-weight: bold;
   border-radius: 5px;
   margin: 3px;
   width: 50px;
   outline: transparent;
+  /*border: 2px solid goldenrod;*/
+
 }
 
 .red {

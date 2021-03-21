@@ -2,8 +2,7 @@ import React, {useEffect, useReducer} from 'react';
 import "./App.css"
 import Counter from './components/Counter';
 import CounterSetup from "./components/CounterSetup";
-import {reducer, setBlockSetupAC, setCounterValueAC, setMaxValueAC, setStartValueAC} from "./counter-reducer";
-import {Button} from "./components/Button";
+import {reducer, setCounterValueAC, setMaxValueAC, setStartValueAC, setTextModeAC} from "./counter-reducer";
 
 export type StateType = {
     counterValue: number
@@ -38,19 +37,23 @@ function App() {
         if (startValueAsString) {
             dispatch(setStartValueAC(JSON.parse(startValueAsString)))
         }
+        let textModeAsString = localStorage.getItem('textMode')
+        if (textModeAsString) {
+            dispatch(setTextModeAC(JSON.parse(textModeAsString)))
+        }
     }, [])
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(state.counterValue))
         localStorage.setItem('maxValue', JSON.stringify(state.maxValue))
         localStorage.setItem('startValue', JSON.stringify(state.startValue))
-    }, [state.counterValue, state.maxValue, state.startValue])
-
-    const setupButtonHandler = () => dispatch(setBlockSetupAC(!state.setupBlock))
+        localStorage.setItem('textMode', JSON.stringify(state.textMode))
+    }, [state.counterValue, state.maxValue,
+        state.startValue, state.textMode])
 
     return (
         <div className={"App"}>
             <div>
-                <Counter state={state} dispatch={dispatch} setupButtonHandler={setupButtonHandler}/>
+                <Counter state={state} dispatch={dispatch}/>
             </div>
             <div>
                 <div>
