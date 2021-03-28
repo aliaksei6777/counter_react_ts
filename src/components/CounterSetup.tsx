@@ -22,7 +22,7 @@ const CounterSetup: React.FC<CounterSetupPropsType> = ({state,dispatch}) => {
     }
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setMaxValueAC(e.currentTarget.valueAsNumber))
-        e.currentTarget.valueAsNumber < 0 || e.currentTarget.valueAsNumber <= startValue
+        e.currentTarget.valueAsNumber < 1 || e.currentTarget.valueAsNumber <= startValue
             ? dispatch(setDisableButtonAC(true))
             : dispatch(setDisableButtonAC(false));
         dispatch(setTextModeAC(true))

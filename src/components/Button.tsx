@@ -6,10 +6,10 @@ type ButtonPropsType = {
     buttonTitle: string
 }
 
-export function Button (props: ButtonPropsType) {
+export const Button: React.FC<ButtonPropsType> = ({onClick, disabled, buttonTitle}) => {
     return (
         <div>
-            <button onClick={props.onClick} disabled={props.disabled}>{props.buttonTitle}</button>
+            <button onClick={onClick} disabled={disabled}>{buttonTitle}</button>
         </div>
     )
 }

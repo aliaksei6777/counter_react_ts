@@ -27,20 +27,16 @@ function App() {
     useEffect(() => {
         let counterValueAsString = localStorage.getItem('counterValue')
         if (counterValueAsString) {
-            dispatch(setCounterValueAC(JSON.parse(counterValueAsString)))
-        }
+            dispatch(setCounterValueAC(JSON.parse(counterValueAsString)))}
         let maxValueAsString = localStorage.getItem('maxValue')
         if (maxValueAsString) {
-            dispatch(setMaxValueAC(JSON.parse(maxValueAsString)))
-        }
+            dispatch(setMaxValueAC(JSON.parse(maxValueAsString)))}
         let startValueAsString = localStorage.getItem('startValue')
         if (startValueAsString) {
-            dispatch(setStartValueAC(JSON.parse(startValueAsString)))
-        }
+            dispatch(setStartValueAC(JSON.parse(startValueAsString)))}
         let textModeAsString = localStorage.getItem('textMode')
         if (textModeAsString) {
-            dispatch(setTextModeAC(JSON.parse(textModeAsString)))
-        }
+            dispatch(setTextModeAC(JSON.parse(textModeAsString)))}
     }, [])
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(state.counterValue))
