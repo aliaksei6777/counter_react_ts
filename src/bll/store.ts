@@ -1,6 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {reducer} from "./counter-reducer";
 
+
 const rootReducer = combineReducers({
     state: reducer
 })
