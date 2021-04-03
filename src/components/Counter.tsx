@@ -1,15 +1,14 @@
 import React from 'react';
 import {Button} from './Button';
 import s from "./Counter.module.css"
-import {StateType} from "../App";
-import {ActionType, setBlockSetupAC, setCounterValueAC} from "../counter-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../bll/store";
+import {InitialStateType, setBlockSetupAC, setCounterValueAC} from "../bll/counter-reducer";
 
-type CounterPropsType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
-}
 
-const Counter: React.FC<CounterPropsType> = ({state,dispatch}) =>  {
+const Counter = () =>  {
+    const dispatch = useDispatch()
+    const state = useSelector<AppRootStateType, InitialStateType>(state => state.state)
     const maxValue = state.maxValue
     const startValue = state.startValue
     const counterValue = state.counterValue

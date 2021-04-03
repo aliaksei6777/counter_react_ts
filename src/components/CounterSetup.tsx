@@ -1,16 +1,19 @@
 import React, {ChangeEvent} from 'react';
 import {Button} from './Button';
 import s from './CounterSetup.module.css'
-import {StateType} from "../App";
-import {ActionType, setCounterValueAC, setDisableButtonAC,
-    setMaxValueAC, setStartValueAC, setTextModeAC} from "../counter-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../bll/store";
+import {
+    InitialStateType,
+    setCounterValueAC,
+    setDisableButtonAC,
+    setMaxValueAC, setStartValueAC,
+    setTextModeAC
+} from "../bll/counter-reducer";
 
-type CounterSetupPropsType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
-}
-
-const CounterSetup: React.FC<CounterSetupPropsType> = ({state,dispatch}) => {
+const CounterSetup = () => {
+    const dispatch = useDispatch()
+    const state = useSelector<AppRootStateType, InitialStateType>(state => state.state)
     const maxValue = state.maxValue
     const startValue = state.startValue
 

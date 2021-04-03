@@ -1,4 +1,4 @@
-import {StateType} from "./App";
+
 
 const SET_COUNTER_VALUE = "SET-COUNTER-VALUE"
 const SET_MAX_VALUE = "SET-MAX-VALUE"
@@ -54,7 +54,18 @@ type setBlockSetupType = ReturnType<typeof setBlockSetupAC>
 export type ActionType = setMaxValueType | setCounterValueType | setStartValueType
     | setTextModeType | setDisableButtonType | setBlockSetupType
 
-export const reducer = (state: StateType, action: ActionType): StateType => {
+export type InitialStateType = typeof InitialState
+
+const InitialState = {
+    counterValue: 0,
+    maxValue: 5,
+    startValue: 0,
+    textMode: false,
+    buttonDisable: true,
+    setupBlock: false
+}
+
+export const reducer = (state: InitialStateType = InitialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_COUNTER_VALUE:
             return {...state, counterValue: action.value}
@@ -69,7 +80,7 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
         case SET_SETUP_BLOCK:
             return {...state, setupBlock: action.mode}
         default:
-            throw new Error('Wrong action type!!!')
+           return state
     }
     return state;
 }
