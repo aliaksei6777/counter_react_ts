@@ -7,40 +7,40 @@ const SET_TEXT_MODE = "SET-TEXT-MODE"
 const SET_BUTTON_DISABLE = "SET-BUTTON-DISABLE"
 const SET_SETUP_BLOCK = "SET-SETUP-BLOCK"
 
-export const setCounterValueAC = (value: number) => {
+export const setCounterValueAC = (counterValue: number) => {
     return {
         type: SET_COUNTER_VALUE,
-        value: value
+        payload: {counterValue}
     } as const
 }
-export const setMaxValueAC = (value: number) => {
+export const setMaxValueAC = (maxValue: number) => {
     return {
         type: SET_MAX_VALUE,
-        value: value
+        payload: {maxValue}
     } as const
 }
-export const setStartValueAC = (value: number) => {
+export const setStartValueAC = (startValue: number) => {
     return {
         type: SET_START_VALUE,
-        value: value
+        payload: {startValue}
     } as const
 }
-export const setTextModeAC = (mode: boolean) => {
+export const setTextModeAC = (textMode: boolean) => {
     return {
         type: SET_TEXT_MODE,
-        mode: mode
+        payload: {textMode}
     } as const
 }
-export const setDisableButtonAC = (mode: boolean) => {
+export const setDisableButtonAC = (buttonDisable: boolean) => {
     return {
         type: SET_BUTTON_DISABLE,
-        mode: mode
+        payload: {buttonDisable}
     } as const
 }
-export const setBlockSetupAC = (mode: boolean) => {
+export const setBlockSetupAC = (setupBlock: boolean) => {
     return {
         type: SET_SETUP_BLOCK,
-        mode: mode
+        payload: {setupBlock}
     } as const
 }
 
@@ -68,17 +68,12 @@ const InitialState = {
 export const reducer = (state: InitialStateType = InitialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_COUNTER_VALUE:
-            return {...state, counterValue: action.value}
         case SET_MAX_VALUE:
-            return {...state, maxValue: action.value}
         case SET_START_VALUE:
-            return {...state, startValue: action.value}
         case SET_TEXT_MODE:
-            return {...state, textMode: action.mode}
         case SET_BUTTON_DISABLE:
-            return {...state, buttonDisable: action.mode}
         case SET_SETUP_BLOCK:
-            return {...state, setupBlock: action.mode}
+            return {...state, ...action.payload}
         default:
            return state
     }
